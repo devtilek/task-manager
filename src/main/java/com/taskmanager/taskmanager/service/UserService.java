@@ -1,13 +1,19 @@
 package com.taskmanager.taskmanager.service;
 
 import com.taskmanager.taskmanager.dto.UserDTO;
-import com.taskmanager.taskmanager.entity.User;
-import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.UUID;
 
 public interface UserService {
+
     UserDTO getUserById(UUID id);
-    void addUser(UserDTO user);
+
+    List<UserDTO> getAllUsers();
+
+    UserDTO addUser(UserDTO userDTO);
+
+    UserDTO updateUser(UUID id, UserDTO userDTO);
+
     void deleteById(UUID id);
 }
