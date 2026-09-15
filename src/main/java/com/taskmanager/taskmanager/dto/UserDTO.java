@@ -1,12 +1,17 @@
 package com.taskmanager.taskmanager.dto;
 
-import com.taskmanager.taskmanager.entity.Task;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import lombok.Data;
 
-import java.util.List;
+import java.util.UUID;
 
 @Data
 public class UserDTO {
-    String name;
-    List<Task> tasks;
+
+    private UUID id;
+
+    @NotBlank(message = "Name is required")
+    @Size(max = 255, message = "Name must not exceed 255 characters")
+    private String name;
 }
