@@ -78,3 +78,26 @@ Create task:
 ## Error handling
 
 The API returns `404 Not Found` for missing users/tasks and `400 Bad Request` for validation errors.
+
+## Testing
+
+Run the fast service unit tests without starting PostgreSQL:
+
+```bash
+./gradlew test --tests 'com.taskmanager.taskmanager.service.*'
+```
+
+On Windows PowerShell:
+
+```powershell
+.\gradlew.bat test --tests "com.taskmanager.taskmanager.service.*"
+```
+
+The repository also contains a Spring Boot application-context test. To run the **full** test suite, start PostgreSQL with `docker compose up -d` first and then run `./gradlew test`. The GitHub Actions workflow runs isolated service unit tests on pushes and pull requests; it does not require a database.
+
+## Development notes
+
+- API validation uses Jakarta Bean Validation on incoming DTOs.
+- Task creation requires an existing user ID; missing users and tasks return HTTP 404.
+- Deleting a user also deletes their tasks through the JPA relationship.
+- Local PostgreSQL credentials in `docker-compose.yml` are development defaults only. Use separate, strong credentials and environment variables outside local development.
